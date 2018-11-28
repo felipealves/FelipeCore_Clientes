@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FelipeCore.Clientes.Domain", "FelipeCore.Clientes.Negocio\FelipeCore.Clientes.Domain.csproj", "{DDA63034-FB37-45EE-96AD-78DF1E9DC36D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FelipeCore.Clientes.Domain", "FelipeCore.Clientes.Negocio\FelipeCore.Clientes.Domain.csproj", "{DDA63034-FB37-45EE-96AD-78DF1E9DC36D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Application", "1 - Application", "{F2E54A11-7505-4BF3-BF6E-E35449F49CCF}"
 EndProject
@@ -13,17 +13,22 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Service", "3 - Service"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Infra", "4 - Infra", "{27A15778-2684-4294-AA9A-44937124D2E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FelipeCore.Clientes.Service", "FelipeCore.Clientes.Service\FelipeCore.Clientes.Service.csproj", "{9A7A1E30-0549-45F7-AC5B-5D568128E89A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FelipeCore.Clientes.Service", "FelipeCore.Clientes.Service\FelipeCore.Clientes.Service.csproj", "{9A7A1E30-0549-45F7-AC5B-5D568128E89A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.1 - Data", "4.1 - Data", "{A438C70C-9F8D-44A4-A334-64CD5E4334FE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.2 - CrossCutting", "4.2 - CrossCutting", "{584E9406-70C2-42CA-8D01-860837371ED0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FelipeCore.Clientes.Infra.Data", "FelipeCore.Clientes.Infra.Data\FelipeCore.Clientes.Infra.Data.csproj", "{B7A3F074-4C47-4B2B-B01D-5DDB7EBF6D6C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FelipeCore.Clientes.Infra.Data", "FelipeCore.Clientes.Infra.Data\FelipeCore.Clientes.Infra.Data.csproj", "{B7A3F074-4C47-4B2B-B01D-5DDB7EBF6D6C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FelipeCore.Clientes.Infra.CrossCutting", "FelipeCore.Clientes.Infra.CrossCutting\FelipeCore.Clientes.Infra.CrossCutting.csproj", "{5D9D1095-E938-4D2B-88D1-02948146ECF4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FelipeCore.Clientes.Infra.CrossCutting", "FelipeCore.Clientes.Infra.CrossCutting\FelipeCore.Clientes.Infra.CrossCutting.csproj", "{5D9D1095-E938-4D2B-88D1-02948146ECF4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FelipeCore.Clientes.Application", "FelipeCore.Clientes.Application\FelipeCore.Clientes.Application.csproj", "{96A830C7-82A3-4934-98D0-7AF81BB367B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FelipeCore.Clientes.Application", "FelipeCore.Clientes.Application\FelipeCore.Clientes.Application.csproj", "{96A830C7-82A3-4934-98D0-7AF81BB367B4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5 - Scripts SqlLite", "5 - Scripts SqlLite", "{996AC41C-9AD9-4C27-B809-C99C24AA4465}"
+	ProjectSection(SolutionItems) = preProject
+		Create Tables.sql = Create Tables.sql
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
