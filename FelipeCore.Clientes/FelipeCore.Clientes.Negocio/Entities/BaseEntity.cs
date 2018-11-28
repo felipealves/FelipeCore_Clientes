@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace FelipeCore.Clientes.Domain.Entities
+﻿namespace FelipeCore.Clientes.Domain.Entities
 {
-    public abstract class BaseEntity
+    public class BaseEntity
     {
         public int Id { get; set; }
     }

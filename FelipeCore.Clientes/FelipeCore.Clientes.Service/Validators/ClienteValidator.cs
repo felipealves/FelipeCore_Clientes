@@ -1,5 +1,5 @@
 ﻿using FelipeCore.Clientes.Domain.Entities;
-using FelipeCore.Clientes.Service.Services;
+using FelipeCore.Clientes.Domain.Interfaces;
 using FluentValidation;
 using System;
 using System.Linq;
@@ -8,8 +8,12 @@ namespace FelipeCore.Clientes.Service.Validators
 {
     public class ClienteValidator : AbstractValidator<Cliente>
     {
-        public ClienteValidator()
+        private readonly IClienteRepository _repository;
+
+        public ClienteValidator(IClienteRepository repository)
         {
+            _repository = repository;
+
             RuleFor(c => c)
                     .NotNull()
                     .OnAnyFailure(x =>
@@ -37,8 +41,10 @@ namespace FelipeCore.Clientes.Service.Validators
 
         private bool UniqueEmail(Cliente cliente, string email)
         {
-            BaseService<Cliente> service = new BaseService<Cliente>();
-            bool existeCliente = service.Consultar(x => x.Email.ToLower() == email.ToLower() && x.Id != cliente.Id).Any();
+            if (cliente == null || string.IsNullOrEmpty(email))
+                return true;
+
+            bool existeCliente = _repository.Select(x => x.Email.ToLower() == email.ToLower() && x.Id != cliente.Id).Any();
             return !existeCliente;
         }
     }

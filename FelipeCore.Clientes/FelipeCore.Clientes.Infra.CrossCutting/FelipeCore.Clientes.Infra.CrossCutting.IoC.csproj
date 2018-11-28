@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SimpleInjector.Integration.AspNetCore.Mvc" Version="4.4.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FelipeCore.Clientes.Infra.Data\FelipeCore.Clientes.Infra.Data.csproj" />
+    <ProjectReference Include="..\FelipeCore.Clientes.Negocio\FelipeCore.Clientes.Domain.csproj" />
+    <ProjectReference Include="..\FelipeCore.Clientes.Service\FelipeCore.Clientes.Service.csproj" />
+  </ItemGroup>
+
+</Project>

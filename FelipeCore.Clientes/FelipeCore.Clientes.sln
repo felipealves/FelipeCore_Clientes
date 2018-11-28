@@ -21,7 +21,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.2 - CrossCutting", "4.2 -
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FelipeCore.Clientes.Infra.Data", "FelipeCore.Clientes.Infra.Data\FelipeCore.Clientes.Infra.Data.csproj", "{B7A3F074-4C47-4B2B-B01D-5DDB7EBF6D6C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FelipeCore.Clientes.Infra.CrossCutting", "FelipeCore.Clientes.Infra.CrossCutting\FelipeCore.Clientes.Infra.CrossCutting.csproj", "{5D9D1095-E938-4D2B-88D1-02948146ECF4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FelipeCore.Clientes.Infra.CrossCutting.IoC", "FelipeCore.Clientes.Infra.CrossCutting\FelipeCore.Clientes.Infra.CrossCutting.IoC.csproj", "{5D9D1095-E938-4D2B-88D1-02948146ECF4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FelipeCore.Clientes.Application", "FelipeCore.Clientes.Application\FelipeCore.Clientes.Application.csproj", "{96A830C7-82A3-4934-98D0-7AF81BB367B4}"
 EndProject

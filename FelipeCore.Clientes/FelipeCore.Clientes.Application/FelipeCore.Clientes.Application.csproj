@@ -7,9 +7,11 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
+    <PackageReference Include="SimpleInjector.Integration.AspNetCore.Mvc" Version="4.4.1" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FelipeCore.Clientes.Infra.CrossCutting\FelipeCore.Clientes.Infra.CrossCutting.IoC.csproj" />
     <ProjectReference Include="..\FelipeCore.Clientes.Service\FelipeCore.Clientes.Service.csproj" />
   </ItemGroup>
 

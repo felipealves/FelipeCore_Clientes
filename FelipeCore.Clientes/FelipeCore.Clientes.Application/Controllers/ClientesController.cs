@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using FelipeCore.Clientes.Application.Models;
 using FelipeCore.Clientes.Domain.Entities;
+using FelipeCore.Clientes.Domain.Interfaces;
 using FelipeCore.Clientes.Service.Services;
 using FelipeCore.Clientes.Service.Validators;
 using FluentValidation;
@@ -14,11 +15,16 @@ namespace FelipeCore.Clientes.Application.Controllers
 {
     public class ClientesController : Controller
     {
-        private BaseService<Cliente> service = new BaseService<Cliente>();
+        private readonly IClienteService _service;
+
+        public ClientesController(IClienteService service)
+        {
+            _service = service;
+        }
 
         public IActionResult Index()
         {
-            var l = service.ConsultarTodos();
+            var l = _service.ConsultarTodos();
             return View(PopulaViewModel(l.ToList()));
         }
 
@@ -29,7 +35,7 @@ namespace FelipeCore.Clientes.Application.Controllers
                 return NotFound();
             }
 
-            var cliente = service.ConsultarPorId(id.GetValueOrDefault());
+            var cliente = _service.ConsultarPorId(id.GetValueOrDefault());
 
             if (cliente == null)
             {
@@ -59,19 +65,23 @@ namespace FelipeCore.Clientes.Application.Controllers
                         Telefone = clienteViewModel.Telefone
                     };
 
-                    service.Incluir<ClienteValidator>(c);
+                    _service.Incluir(c);
+
+                    return RedirectToAction("Index");
                 }
                 catch (ValidationException ex)
                 {
                     foreach (var error in ex.Errors)
                         ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
                 }
+                catch (ArgumentNullException ex)
+                {
+                    ModelState.AddModelError("Objeto", ex.Message);
+                }
                 catch (Exception ex)
                 {
                     return BadRequest(ex);
                 }
-
-                return RedirectToAction("Index");
             }
             return View(clienteViewModel);
         }
@@ -83,7 +93,7 @@ namespace FelipeCore.Clientes.Application.Controllers
                 return NotFound();
             }
 
-            var c = service.ConsultarPorId(id.GetValueOrDefault());
+            var c = _service.ConsultarPorId(id.GetValueOrDefault());
             if (c == null)
             {
                 return NotFound();
@@ -107,13 +117,13 @@ namespace FelipeCore.Clientes.Application.Controllers
             {
                 try
                 {
-                    var cliente = service.ConsultarPorId(id);
+                    var cliente = _service.ConsultarPorId(id);
 
                     cliente.Nome = clienteViewModel.Nome;
                     cliente.Email = clienteViewModel.Email;
                     cliente.Telefone = clienteViewModel.Telefone;
 
-                    service.Alterar<ClienteValidator>(cliente);
+                    _service.Alterar(cliente);
 
                     return RedirectToAction("Index");
                 }
@@ -121,6 +131,10 @@ namespace FelipeCore.Clientes.Application.Controllers
                 {
                     foreach (var error in ex.Errors)
                         ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+                }
+                catch (ArgumentNullException ex)
+                {
+                    ModelState.AddModelError("Objeto", ex.Message);
                 }
                 catch (Exception ex)
                 {
@@ -137,7 +151,7 @@ namespace FelipeCore.Clientes.Application.Controllers
                 return NotFound();
             }
 
-            var c = service.ConsultarPorId(id.GetValueOrDefault());
+            var c = _service.ConsultarPorId(id.GetValueOrDefault());
 
             if (c == null)
             {
@@ -153,7 +167,7 @@ namespace FelipeCore.Clientes.Application.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Excluir(int id)
         {
-            service.Remover(id);
+            _service.Remover(id);
             return RedirectToAction("Index");
         }
 
