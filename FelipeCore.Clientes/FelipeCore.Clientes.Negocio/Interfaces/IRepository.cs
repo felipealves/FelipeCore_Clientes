@@ -1,5 +1,7 @@
 ﻿using FelipeCore.Clientes.Domain.Entities;
+using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace FelipeCore.Clientes.Domain.Interfaces
 {
@@ -14,5 +16,7 @@ namespace FelipeCore.Clientes.Domain.Interfaces
         T Select(int id);
 
         IList<T> SelectAll();
+
+        IList<T> Select(Expression<Func<T, bool>> expression);
     }
 }

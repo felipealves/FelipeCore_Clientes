@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using FelipeCore.Clientes.Application.Models;
 using FelipeCore.Clientes.Domain.Entities;
 using FelipeCore.Clientes.Service.Services;
+using FelipeCore.Clientes.Service.Validators;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -48,14 +50,26 @@ namespace FelipeCore.Clientes.Application.Controllers
         {
             if (ModelState.IsValid)
             {
-                var c = new Cliente
+                try
                 {
-                    Nome = clienteViewModel.Nome,
-                    Email = clienteViewModel.Email,
-                    Telefone = clienteViewModel.Telefone
-                };
-                
-                service.Incluir(c);
+                    var c = new Cliente
+                    {
+                        Nome = clienteViewModel.Nome,
+                        Email = clienteViewModel.Email,
+                        Telefone = clienteViewModel.Telefone
+                    };
+
+                    service.Incluir<ClienteValidator>(c);
+                }
+                catch (ValidationException ex)
+                {
+                    foreach (var error in ex.Errors)
+                        ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex);
+                }
 
                 return RedirectToAction("Index");
             }
@@ -93,19 +107,25 @@ namespace FelipeCore.Clientes.Application.Controllers
             {
                 try
                 {
-                    var c = service.ConsultarPorId(id);
-                    
-                    c.Nome = clienteViewModel.Nome;
-                    c.Email = clienteViewModel.Email;
-                    c.Telefone = clienteViewModel.Telefone;
+                    var cliente = service.ConsultarPorId(id);
 
-                    service.Alterar(c);
+                    cliente.Nome = clienteViewModel.Nome;
+                    cliente.Email = clienteViewModel.Email;
+                    cliente.Telefone = clienteViewModel.Telefone;
+
+                    service.Alterar<ClienteValidator>(cliente);
+
+                    return RedirectToAction("Index");
                 }
-                catch (Exception)
+                catch (ValidationException ex)
                 {
-                    throw;
+                    foreach (var error in ex.Errors)
+                        ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
                 }
-                return RedirectToAction("Index");
+                catch (Exception ex)
+                {
+                    return BadRequest(ex);
+                }
             }
             return View(clienteViewModel);
         }

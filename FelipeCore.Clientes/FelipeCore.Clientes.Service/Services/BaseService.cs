@@ -4,6 +4,7 @@ using FelipeCore.Clientes.Infra.Data.Repository;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace FelipeCore.Clientes.Service.Services
 {
@@ -11,14 +12,18 @@ namespace FelipeCore.Clientes.Service.Services
     {
         private BaseRepository<T> repository = new BaseRepository<T>();
 
-        public T Incluir(T obj)
+        public T Incluir<V>(T obj) where V : AbstractValidator<T>
         {
+            Validar(obj, Activator.CreateInstance<V>());
+
             repository.Insert(obj);
             return obj;
         }
 
-        public T Alterar(T obj)
+        public T Alterar<V>(T obj) where V : AbstractValidator<T>
         {
+            Validar(obj, Activator.CreateInstance<V>());
+
             repository.Update(obj);
             return obj;
         }
@@ -39,6 +44,19 @@ namespace FelipeCore.Clientes.Service.Services
                 throw new ArgumentException("ID informado inválido, por favor informe um ID válido.");
 
             return repository.Select(id);
+        }
+
+        public IList<T> Consultar(Expression<Func<T, bool>> expression)
+        {
+            return repository.Select(expression);
+        }
+
+        private void Validar(T obj, AbstractValidator<T> validator)
+        {
+            if (obj == null)
+                throw new Exception("Registro não encontrado!");
+
+            validator.ValidateAndThrow(obj);
         }
     }
 }

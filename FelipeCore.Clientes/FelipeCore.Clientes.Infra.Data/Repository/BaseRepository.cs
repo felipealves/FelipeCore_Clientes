@@ -4,6 +4,7 @@ using FelipeCore.Clientes.Infra.Data.Context;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace FelipeCore.Clientes.Infra.Data.Repository
@@ -38,6 +39,11 @@ namespace FelipeCore.Clientes.Infra.Data.Repository
         public T Select(int id)
         {
             return context.Set<T>().Find(id);
+        }
+
+        public IList<T> Select(Expression<Func<T, bool>> expression)
+        {
+            return context.Set<T>().Where(expression).ToList();
         }
     }
 }
